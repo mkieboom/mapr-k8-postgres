@@ -33,5 +33,4 @@ RUN useradd -u $PG_UID -g $PG_GID $PG_USER
 # Expose the Postgres server port
 EXPOSE 5432
 
-#CMD /launch.sh
-CMD /bin/bash
+CMD /launch.sh
