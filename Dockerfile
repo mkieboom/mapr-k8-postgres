@@ -11,10 +11,13 @@ FROM centos
 MAINTAINER mkieboom @ mapr.com
 
 # Set Postgres environment variables, change to your liking
-ENV PGDATA_LOCATION /mapr/demo.mapr.com/postgres
+ENV PGDATA_LOCATION /postgres
+ENV PG_DB mapr
+ENV PG_GROUP mapr
 ENV PG_USER mapr
 ENV PG_PWD mapr
-ENV PG_DB mapr
+ENV PG_UID 5000
+ENV PG_GID 5000
 
 # Install Postgres
 RUN yum install -y postgresql-server
@@ -23,7 +26,12 @@ RUN yum install -y postgresql-server
 ADD ./launch.sh /launch.sh
 RUN chmod +x /launch.sh
 
+# Create the user and group to run the Postgres server
+RUN groupadd -g $PG_GID $PG_GROUP
+RUN useradd -u $PG_UID -g $PG_GID $PG_USER
+
 # Expose the Postgres server port
 EXPOSE 5432
 
-CMD /launch.sh
+#CMD /launch.sh
+CMD /bin/bash
