@@ -15,7 +15,9 @@ echo
 echo "Running Postgres launch script now."
 echo
 
-mkdir -p $PGDATA_LOCATION
+# The Postgres data location should already have been created by the MapR Volume Driver Plugin for K8
+# For local testing it might be neccessary to create the folder manually
+#mkdir -p $PGDATA_LOCATION
 
 # Set access rights for postgres user on database location folder
 chown -R $PG_USER:$PG_GROUP $PGDATA_LOCATION
