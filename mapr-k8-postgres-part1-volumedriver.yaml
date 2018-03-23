@@ -1,0 +1,74 @@
+# MapR Volume Driver Plugin for Kubernetes
+
+# MapR Apps Namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mapr-apps
+  labels:
+    name: mapr-apps
+
+
+# StorageClass for MapR Converged Data Platform
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+   name: maprfs-sc-postgres
+   namespace: mapr-apps
+provisioner: mapr.com/maprfs
+parameters:
+    # Configure below MapR cluster details to reflect your MapR cluster configuration
+    restServers: "172.16.1.61:8443"
+    cldbHosts: "172.16.1.61"
+    cluster: "demo.mapr.com"
+    securityType: "unsecure"
+    maprSecretName: "mapr-provisioner-secrets"
+    maprSecretNamespace: "mapr-apps"
+    namePrefix: "postgres"
+    mountPrefix: "/postgres"
+    reclaimPolicy: “Retain”
+    advisoryquota: "100M"
+    auditenabled: "1"
+    forceauditenable: "1"
+    replication: "3"
+    minreplication: "2"
+    nsreplication: "3"
+    nsminreplication: "2"
+    type: "rw"
+    mount: "1"
+
+
+# PersistentVolumeClaim for MapR Converged Data Platform
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: maprfs-pvc-postgres
+  namespace: mapr-apps
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: maprfs-sc-postgres
+  resources:
+    requests:
+      storage: 300M
+
+
+# Secret to authenticate with MapR Converged Data Platform
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mapr-provisioner-secrets
+  namespace: mapr-apps
+type: Opaque
+data:
+# base64 encoding: echo -n 'mapr' | base64
+  MAPR_CLUSTER_USER: "bWFwcg=="
+  MAPR_CLUSTER_PASSWORD: "bWFwcg=="
+
+
+
+
