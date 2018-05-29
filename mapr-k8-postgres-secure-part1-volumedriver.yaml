@@ -1,13 +1,13 @@
 # MapR Volume Driver Plugin for Kubernetes
 
 # MapR Apps Namespace
-# ---
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   name: mapr-apps
-#   labels:
-#     name: mapr-apps
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mapr-apps
+  labels:
+    name: mapr-apps
 
 
 # Secret to authenticate with MapR Converged Data Platform
@@ -35,9 +35,9 @@ type: Opaque
 data:
 # To create a Ticket:
 # 1. maprlogin password -user mapr
-# 2. cat /tmp/maprticket_#### | base64
+# 2. echo -n $(cat /tmp/maprticket_0) | base64
 # 3. combine 6 lines base64 output in single CONTAINER_SECRET line:
-  CONTAINER_SECRET: ZGVtby5tYXByLmNvbSBjclcxZWVvMjV1d1p1UFY1NWJYWlBGSHl0T0NxK0tFdVY1V1lFMElmZGlyS3NYT2xYQVRYVGg2TnlGbDgyR0lqbmZVYkhyWnVOb1ZGQWRVS2pQVy9NQUZQaEk1UWhQTVJBWjAvc1hVYWMvTnVIQ1VrZkRmbUVpalpoL3pPVjMzUWNHNXdTQXdDK3Y2YkIwakR6RHNrVk1TSjFoZDJoYzA2WXhPWllyZkxTWnZyUnA1SjU5N1dXNDFQZDdmNlZYL1pDeW9aNnJXS3ExVmdrTmRrQ1Y2aGRUWHFYZEFEcEF1dEZaY2hiazJINy9yenladmVCOE5kYWt4T1h4eWJjb3pMeU5iVUc4MGc2UmdjdmpYZm8vN1IvVEFNYmxqR1R3az0K
+  CONTAINER_SECRET: "ZGVtby5tYXByLmNvbSBDM3ViakNIWDZiM0k0UWFIUVNMUjFFNVR2d01kUzdLTldqRytNUnRBVjhwaHlBOHpqVFVsdG1CbWFtTDcyYnFZMFJSN2h1Sjc3cGRYcDN6c21TVTA5R1QrcHlZVWZpbVFhbEorc1R3R2RpUllteStmSExsV0VVc3ppbDU1RlJBYlltd0JoaGdtbE9IQ1dFRWlkbVc2Tmp6aFk5VGowalY5bEVnWGhxMjhHaDIrK0tvZFkwZVQzRWJSTDdzalB5STdNcDhJLzBzQ24zam5aQkJEVXNOWk1SZDNCcjF0TkdaQ2xBZy9SVDh5anJKdDZXb3dvV1BVZGcyc2M5UCtlbzhkemR0dXRvbFVnM3NIM296cmlBT0RnM3NnbkorcXZSYz0="
 
 # StorageClass for MapR Converged Data Platform
 ---
@@ -59,7 +59,7 @@ parameters:
     maprSecretNamespace: "mapr-apps"
     namePrefix: "postgres"
     mountPrefix: "/postgres"
-    reclaimPolicy: “Retain”
+    reclaimPolicy: "Retain"
     advisoryquota: "100M"
     auditenabled: "1"
     forceauditenable: "1"
