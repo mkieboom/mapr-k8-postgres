@@ -35,8 +35,7 @@ type: Opaque
 data:
 # To create a Ticket:
 # 1. maprlogin password -user mapr
-# 2. echo -n $(cat /tmp/maprticket_####) | base64
-# 3. combine 6 lines base64 output in single CONTAINER_SECRET line:
+# 2. echo -n $(cat /tmp/maprticket_####) | base64 -w 0
   CONTAINER_TICKET: ZGVtby5tYXByLmNvbSBDM3ViakNIWDZiM0k0UWFIUVNMUjFFNVR2d01kUzdLTldqRytNUnRBVjhwaHlBOHpqVFVsdG1CbWFtTDcyYnFZMFJSN2h1Sjc3cGRYcDN6c21TVTA5R1QrcHlZVWZpbVFhbEorc1R3R2RpUllteStmSExsV0VVc3ppbDU1RlJBYlltd0JoaGdtbE9IQ1dFRWlkbVc2Tmp6aFk5VGowalY5bEVnWGhxMjhHaDIrK0tvZFkwZVQzRWJSTDdzalB5STdNcDhJLzBzQ24zam5aQkJEVXNOWk1SZDNCcjF0TkdaQ2xBZy9SVDh5anJKdDZXb3dvV1BVZGcyc2M5UCtlbzhkemR0dXRvbFVnM3NIM296cmlBT0RnM3NnbkorcXZSYz0=
 
 # StorageClass for MapR Converged Data Platform
